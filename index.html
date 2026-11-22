@@ -280,13 +280,6 @@ footer{background:var(--black);color:var(--sub)}
         <div class="session"><span class="meta">60 MIN · ONE-ON-ONE</span><h3>IFS inner work session</h3><p>Get to know the inner parts that carry old patterns, from a calm and compassionate Self.</p><span class="price">$[price]</span><button class="btn btn-primary" data-event="ifs-session">Book</button></div>
         <div class="session"><span class="meta">[DATES] · GROUP · IN PERSON</span><h3>Group retreat</h3><p>Constellations in a group, where participants stand in for each other’s family members.</p><span class="price">$[price]</span><button class="btn btn-primary" data-event="group-retreat">Reserve a seat</button></div>
       </div>
-      <div class="booking-box">
-        <div id="cal-inline"></div>
-        <div class="cal-placeholder" id="cal-placeholder" hidden>
-          <strong>The booking calendar will appear here</strong>
-          <span>Connect Boutaina’s Cal.com account by setting CAL_USERNAME in the settings at the bottom of this file.</span>
-        </div>
-      </div>
       <p class="note">Secure payment by card, Apple Pay or Google Pay via Stripe. Free cancellation or rescheduling up to 24 hours before your session.</p>
     </div>
   </section>
@@ -365,8 +358,6 @@ moreBtn.addEventListener('click',()=>{const o=more.classList.toggle('open');more
 // Cal.com booking embed
 const calReady = CAL_USERNAME && CAL_USERNAME !== "YOUR-CAL-USERNAME";
 if (!calReady) {
-  document.getElementById('cal-placeholder').hidden = false;
-  document.getElementById('cal-inline').style.display = 'none';
   document.querySelectorAll('[data-event]').forEach(b=>b.addEventListener('click',()=>document.getElementById('book').scrollIntoView()));
 } else {
   (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
@@ -374,8 +365,6 @@ if (!calReady) {
   const ui = { theme: "dark", hideEventTypeDetails: false, layout: "month_view",
     cssVarsPerTheme: { dark: { "cal-brand": "#F2C230", "cal-brand-text": "#0E1620" } } };
   Cal("ui", ui);
-  // Full booking page (all session types) shown in the page
-  Cal("inline", { elementOrSelector: "#cal-inline", calLink: CAL_USERNAME, layout: "month_view" });
   // Each "Book" button opens that session's calendar in a pop-up
   document.querySelectorAll('[data-event]').forEach(b=>{
     b.setAttribute('data-cal-link', CAL_USERNAME + '/' + b.dataset.event);
